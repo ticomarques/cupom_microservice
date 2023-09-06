@@ -137,4 +137,36 @@ def del_produto(query: CupomBuscaSchema):
         error_msg = "Produto não encontrado na base :/"
         logger.warning(f"Erro ao deletar produto #'{cupom_nome}', {error_msg}")
         return {"message": error_msg}, 404
+    
+
+
+@app.put('/cupom', tags=[cupom_tag],
+            responses={"200": CupomViewSchema, "404": ErrorSchema})
+def update_produto():
+    """Edita o cupom
+    Retorna uma mensagem de confirmação da atualização.
+    """
+    idItem = request.json['id']
+    nome = request.json['nome']
+    valor = request.json['valor']
+    
+    # criando conexão com a base
+    session = Session()
+    cupomBanco = session.query(Cupom).filter_by(id = idItem).first()
+    logger.debug(f"Atualizando dados do cupom #{cupomBanco.id} com nome #{cupomBanco.nome} ")
+
+    # fazendo a atualizacao
+    cupomBanco.nome = nome
+    cupomBanco.valor = valor
+    session.commit()
+
+    if cupomBanco:
+        # retorna a representação da mensagem de confirmação
+        logger.debug(f"Atualizando cupom #{idItem}")
+        return {"message": "Cupom atualizado", "id": idItem}
+    else:
+        # se o produto não foi encontrado
+        error_msg = "Cupom não encontrado na base :/"
+        logger.warning(f"Erro ao atualizar cupom #'{idItem}', {error_msg}")
+        return {"message": error_msg}, 404
 
