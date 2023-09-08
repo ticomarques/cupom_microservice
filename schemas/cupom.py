@@ -26,7 +26,7 @@ class ListagemCuponsSchema(BaseModel):
 
 
 def apresenta_produtos(cupons: List[Cupom]):
-    """ Retorna uma representação do produto seguindo o schema definido em
+    """ Retorna uma representação do cupom seguindo o schema definido em
         CupomViewSchema.
     """
     result = []

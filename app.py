@@ -146,10 +146,11 @@ def update_produto():
     """Edita o cupom
     Retorna uma mensagem de confirmação da atualização.
     """
+
     idItem = request.json['id']
     nome = request.json['nome']
     valor = request.json['valor']
-    
+
     # criando conexão com a base
     session = Session()
     cupomBanco = session.query(Cupom).filter_by(id = idItem).first()
