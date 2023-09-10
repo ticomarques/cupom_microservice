@@ -51,3 +51,19 @@ automaticamente após uma mudança no código fonte.
 Abra o [http://localhost:8000/#/](http://localhost:8000/#/) no navegador para verificar o status da API em execução.
 
 ## Docker
+## Como executar 
+
+Navegue até o diretório que contém o Dockerfile e o requirements.txt no terminal.
+
+```
+$ docker build -t cupom .
+```
+Obs: Cupom será o nome dado a imagem.
+
+Uma vez criada a imagem, para executar o container basta executar o seguinte o comando:
+
+```
+$ docker run -p 8000:8000 cupom
+```
+
+Uma vez executando, para acessar a API, basta abrir o [http://localhost:8000/#/](http://localhost:8000/#/) no navegador.
