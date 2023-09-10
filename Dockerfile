@@ -1,10 +1,17 @@
-FROM python:3.9-slim-buster
+# Define a imagem base
+FROM python:3.9
 
+# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# Copia os arquivos de requisitos para o diretório de trabalho
+COPY requirements.txt .
 
+# Instala as dependências do projeto
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o código-fonte para o diretório de trabalho
 COPY . .
 
-CMD ["flask", "run", "--host=0.0.0.0", "--port 8000"]
+# Define o comando de execução da API
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
